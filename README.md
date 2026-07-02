@@ -6,12 +6,12 @@
 
 Audit notification plans for rate limits, quiet hours, and opt-out controls. It solves review drift by turning plain-text plans into deterministic CI-friendly findings.
 
-## Input Contract 37
+## Input Contract
 
 Accepts notification plan. The reader supports plain text, JSON, JSONL, and CSV so the
 tool can fit into scripts, CI jobs, and review exports.
 
-## CLI Walkthrough 37
+## CLI Walkthrough
 
 ```bash
 python -m pip install -e ".[dev]"
@@ -20,7 +20,7 @@ notification-rate-check examples/sample.txt --json --fail-on medium
 python -m notification_rate_check --help
 ```
 
-## Rule Surface 37
+## Rule Surface
 
 | Rule | Severity | Meaning |
 |---|---:|---|
@@ -28,7 +28,7 @@ python -m notification_rate_check --help
 | `missing-quiet-hours` | medium | quiet hours missing |
 | `missing-optout` | low | opt-out missing |
 
-## Validation Notes 37
+## Validation Notes
 
 ```bash
 ruff check .

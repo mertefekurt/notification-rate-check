@@ -1,45 +1,36 @@
-# Notification Rate Check
-
 ![Notification Rate Check cover](assets/readme-cover.svg)
+
+# Notification Rate Check
 
 > Audit notification plans for rate limits, quiet hours, and opt-out controls
 
-![stack](https://img.shields.io/badge/stack-Python-16a34a?style=flat-square) ![python](https://img.shields.io/badge/python-3.11-dc2626?style=flat-square) ![license](https://img.shields.io/badge/license-MIT-7c3aed?style=flat-square) ![ci](https://img.shields.io/badge/ci-GitHub%20Actions-0891b2?style=flat-square)
+This is a review desk for notification quality. The useful part is not a dashboard; it is the tiny repeatable moment where vague records become specific findings.
 
-## At a glance
+## Finding catalog for `notification-rate-check`
 
-| Area | Detail |
-| --- | --- |
-| Focus | notification quality |
-| Command | `notification-rate-check` |
-| Formats | text, JSON, JSONL, CSV |
-| Output | Markdown table or JSON |
-
-## What it checks
-
-| Rule | Severity | What it catches |
+| Finding | Level | Why it matters |
 | --- | --- | --- |
 | `no-rate-limit` | high | rate limit missing |
 | `missing-quiet-hours` | medium | quiet hours missing |
 | `missing-optout` | low | opt-out missing |
 
-## Try it locally
+## Try the sample
 
 ```bash
+git clone https://github.com/mertefekurt/notification-rate-check.git
+cd notification-rate-check
+python -m venv .venv
+source .venv/bin/activate
 python -m pip install -e ".[dev]"
+```
+
+```bash
 notification-rate-check examples/sample.txt
-notification-rate-check examples/sample.txt --json --fail-on medium
+notification-rate-check examples/sample.txt --json
 ```
 
-## Notes from the code
+## Reading the output
 
-`rules.py` keeps the project policy explicit, while `core.py` handles parsing and report rendering. The CLI stays thin on purpose so the checks are easy to test.
-
-## Verify
-
-```bash
-python -m pip install -e ".[dev]"
-ruff check .
-pytest
-python -m notification_rate_check --help
-```
+- Markdown is meant for humans reviewing a change.
+- JSON is meant for CI, scripts, or saved reports.
+- `--fail-on` lets the repo decide how strict a gate should be.
